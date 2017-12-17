@@ -1,0 +1,10 @@
+<config>
+    <properties>
+        <property name="description"    value="Plugin for update status"/>
+        <property name="category"       value="devel"/>
+        <property name="short-name"     value="atualiza"/>
+        <property name="startup-time"   value="on load"/>
+    </properties>
+</config>
+
+                
