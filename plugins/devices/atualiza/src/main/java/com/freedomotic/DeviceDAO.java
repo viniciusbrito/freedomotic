@@ -55,4 +55,14 @@ public class DeviceDAO {
     public void destroy() {
         this.datastore.getDB().dropDatabase();
     }
+
+    public boolean equals(Device dv) {
+
+        Device dbDevice = this.findById(dv.getId());
+        if((dbDevice != null) && (dbDevice.isStatus() != dv.isStatus())) {
+            return true;
+        }
+        return false;
+
+    }
 }
