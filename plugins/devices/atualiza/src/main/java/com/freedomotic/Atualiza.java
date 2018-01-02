@@ -9,12 +9,13 @@ import com.freedomotic.reactions.Command;
 import com.freedomotic.plugins.devices.atualiza.api.WebServer;
 
 import java.io.IOException;
-import java.util.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;;
 
 //TODO: please rename this class!
 public class Atualiza extends Protocol {
 
-    private static final Logger LOG = Logger.getLogger(Atualiza.class.getName());
+    public final Logger LOG = LoggerFactory.getLogger(Atualiza.class.getName());
     /*final int POLLING_WAIT;*/
     protected WebServer server;
 

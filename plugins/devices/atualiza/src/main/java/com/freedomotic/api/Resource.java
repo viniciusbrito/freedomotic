@@ -4,6 +4,7 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.Produces;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -19,6 +20,7 @@ import com.freedomotic.events.GenericEvent;
 
 
 import java.util.List;
+import java.util.logging.Logger;
 
 @Path("/")
 public class Resource {
@@ -50,33 +52,53 @@ public class Resource {
         return Response.status(201).entity(dv.toString()).build();
     }
 
-    /*Create/Save/Update a device*/
+    /*Create a device*/
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response addDevice(Device device) {
 
         DeviceDAO dvDAO = new DeviceDAO();
-        Device dbDevice = dvDAO.findById(device.getId());
-
-        if((dbDevice != null) && (dbDevice.isStatus() != device.isStatus())) {
-            //Disparar evento
-            GenericEvent event = new GenericEvent(this);
-            event.setDestination("app.event.sensor.messages.atualiza");
-            event.addProperty("id",  device.getId().toString());
-            event.addProperty("message", "The device "+device.getName()+" has been updated!");
-            this.parent.getBusService().send(event);
-
-        }
-
+        /*Saving*/
         Device savedDevice = dvDAO.save(device);
+
+        GenericEvent event = new GenericEvent(this);
+        event.setDestination("app.event.sensor.messages.atualiza");
+        event.addProperty("id",  savedDevice.getId().toString());
+        event.addProperty("message", "The device "+savedDevice.getName()+" has been created!");
+        this.parent.getBusService().send(event);
+        this.parent.LOG.info("Event sent: created");
+        System.out.println("Event sent: created");
 
         /*String result = "{\"id\":\"" + savedDevice.getId()+"\"}";*/
         return Response.status(201).entity(savedDevice.toString()).build();
 
     }
 
-    /*Create/Save/Update a list of devices*/
+    /*Update a device*/
+    @PUT
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response upDevice(Device device) {
+
+        /*Updating*/
+        DeviceDAO dvDAO = new DeviceDAO();
+        Device savedDevice = dvDAO.save(device);
+
+        /*Event*/
+        GenericEvent event = new GenericEvent(this);
+        event.setDestination("app.event.sensor.messages.atualiza");
+        event.addProperty("id",  device.getId().toString());
+        event.addProperty("message", "The device "+device.getName()+" has been updated!");
+        this.parent.getBusService().send(event);
+        this.parent.LOG.info("Event sent: updated");
+        System.out.println("Event sent: updated");
+
+        return Response.status(201).entity(savedDevice.toString()).build();
+
+    }
+
+    /*Create/Update a list of devices*/
     @POST
     @Path("/devices")
     @Consumes(MediaType.APPLICATION_JSON)
