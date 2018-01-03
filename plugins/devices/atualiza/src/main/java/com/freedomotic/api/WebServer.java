@@ -33,12 +33,12 @@ public class WebServer {
         filterHolder.setInitParameter("allowedHeaders", "X-Requested-With,Content-Type,Accept,Origin");
         filterHolder.setInitParameter("allowedMethods", "OPTIONS,GET,PUT,POST,DELETE,HEAD");
 
-        try {
+/*        try {
             server.start();
         } catch (Exception e) {
             System.out.println("Falhou ao iniciar o servidor");
             throw new RuntimeException("Could not start the server", e);
-        }
+        }*/
 
 
     }
