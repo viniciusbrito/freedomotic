@@ -32,7 +32,7 @@ public class WebServer {
         filterHolder.setInitParameter("allowedOrigins", "*");
         filterHolder.setInitParameter("allowedHeaders", "X-Requested-With,Content-Type,Accept,Origin");
         filterHolder.setInitParameter("allowedMethods", "OPTIONS,GET,PUT,POST,DELETE,HEAD");
-        
+
     }
 
     public void start()
