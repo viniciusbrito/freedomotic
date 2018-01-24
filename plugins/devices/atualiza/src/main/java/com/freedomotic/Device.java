@@ -17,6 +17,7 @@ public class Device {
     @Id
     private ObjectId id;
     private String name;
+    private String location;
     private boolean status;
     @Embedded
     private List<Feature> features;
@@ -41,6 +42,14 @@ public class Device {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
     }
 
     public List<Feature> getFeatures() {
@@ -76,6 +85,7 @@ public class Device {
         return "{" +
                 "\"id\":\"" + this.id + '"' +
                 ", \"name\":\"" + this.name + '"' +
+                ", \"location\":\"" + this.location + '"' +
                 ", \"features\":" + this.features.toString() +
                 ", \"status\":" + this.status +
                 ", \"xml\":\"" + this.replace(this.xml) + "\"}";
