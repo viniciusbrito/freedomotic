@@ -7,6 +7,7 @@ import org.mongodb.morphia.annotations.Reference;
 import org.mongodb.morphia.annotations.Embedded;
 
 import com.freedomotic.plugins.devices.atualiza.Feature;
+import com.freedomotic.plugins.devices.atualiza.Status;
 
 import java.util.List;
 
@@ -15,10 +16,11 @@ import java.util.List;
 public class Device {
 
     @Id
-    private ObjectId id;
+    private Long id;
     private String name;
     private String location;
-    private boolean status;
+    @Embedded
+    private List<Status> status;
     @Embedded
     private List<Feature> features;
     private String xml;
@@ -28,11 +30,11 @@ public class Device {
     }
 
 
-    public ObjectId getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(ObjectId id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -64,11 +66,11 @@ public class Device {
         this.features.add(feature);
     }
 
-    public boolean isStatus() {
+    public List<Status> getStatus() {
         return status;
     }
 
-    public void setStatus(boolean status) {
+    public void setStatus(List<Status> status) {
         this.status = status;
     }
 
@@ -87,7 +89,7 @@ public class Device {
                 ", \"name\":\"" + this.name + '"' +
                 ", \"location\":\"" + this.location + '"' +
                 ", \"features\":" + this.features.toString() +
-                ", \"status\":" + this.status +
+                ", \"status\":" + this.status.toString() +
                 ", \"xml\":\"" + this.replace(this.xml) + "\"}";
     }
 

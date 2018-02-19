@@ -1,5 +1,6 @@
 package com.freedomotic.plugins.devices.atualiza.api;
 
+import javax.swing.plaf.synth.SynthEditorPaneUI;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.Produces;
 import javax.ws.rs.GET;
@@ -45,7 +46,7 @@ public class Resource {
     @GET
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getDevice(@PathParam("id") ObjectId id) {
+    public Response getDevice(@PathParam("id") Long id) {
 
         DeviceDAO dvDAO = new DeviceDAO();
         Device dv = dvDAO.findById(id);
@@ -66,6 +67,7 @@ public class Resource {
         event.setDestination("app.event.sensor.messages.atualiza");
         event.addProperty("id",  savedDevice.getId().toString());
         event.addProperty("message", "The device "+savedDevice.getName()+" has been created!");
+        event.addProperty("operation", "1");
         this.parent.getBusService().send(event);
         this.parent.LOG.info("Event sent: created");
         System.out.println("Event sent: created");
@@ -90,9 +92,14 @@ public class Resource {
         event.setDestination("app.event.sensor.messages.atualiza");
         event.addProperty("id",  device.getId().toString());
         event.addProperty("message", "The device "+device.getName()+" has been updated!");
-        this.parent.getBusService().send(event);
-        this.parent.LOG.info("Event sent: updated");
-        System.out.println("Event sent: updated");
+        event.addProperty("operation", "2");
+        try {
+            this.parent.getBusService().send(event);
+            this.parent.LOG.info("Event sent: updated");
+
+        }catch (Exception e) {
+            System.out.println(e.toString());
+        }
 
         return Response.status(201).entity(savedDevice.toString()).build();
 
@@ -116,7 +123,7 @@ public class Resource {
     @Path("{id}")
     @Consumes(MediaType.TEXT_PLAIN)
     @Produces(MediaType.TEXT_PLAIN)
-    public Response remove(@PathParam("id") ObjectId id) {
+    public Response remove(@PathParam("id") Long id) {
 
         DeviceDAO dvDAO = new DeviceDAO();
         Device dv = dvDAO.findById(id);

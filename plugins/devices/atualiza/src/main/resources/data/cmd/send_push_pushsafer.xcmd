@@ -1,0 +1,16 @@
+<command>
+    <name>Envia mensagem de notificação com o Pushsafer</name>
+    <receiver>app.actuators.protocol.push.in</receiver>
+    <description>Make a call to specified push notification provider</description>
+    <delay>0</delay>
+    <timeout>0</timeout>
+    <properties>
+        <properties>
+            <property name="push.provider" value="pushsafer"/>
+            <property name="push.category" value="push"/>
+            <property name="param.k" value="oBiUo8CEcYeRkJXB9mhg"/>
+            <property name="push.m" value="@event.message"/>
+            <property name="param.t" value="Device Update"/>
+	    </properties>
+    </properties>
+</command>

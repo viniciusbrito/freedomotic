@@ -78,15 +78,15 @@
         <tuple> <!-- Pushsafer send notifications to iOS, Android & Window 10 > API > https://www.pushsafer.com/en/pushapi -->
             <property name="provider" value="pushsafer"/>
             <property name="category" value="push"/>
-            <property name="active" value="false"/>
+            <property name="active" value="true"/>
             <property name="scheme" value="https"/>
             <property name="host" value="www.pushsafer.com"/>
             <property name="path" value="/api"/>
             <property name="method" value="POST"/>
-            <property name="param.k" value=""/><!-- Private or Alias Key -->
-            <property name="param.m" value="_PUT HERE A MESSAGE CONTENT_"/>
+            <property name="param.k" value="oBiUo8CEcYeRkJXB9mhg"/><!-- Private or Alias Key -->
+            <property name="param.m" value="The device was modified"/>
 <!-- Pushsafer.com API >>> https://www.pushsafer.com/en/pushapi -->            
-<!-- optional --><property name="param.t" value="_PUT HERE A TITLE_"/> 
+<!-- optional --><property name="param.t" value="TITLE"/> 
 <!-- optional --><property name="param.d" value=""/><!-- Device or Device Group ID -->
 <!-- optional --><property name="param.i" value=""/><!-- Icon number 1-98 -->
 <!-- optional --><property name="param.s" value=""/><!-- Sound 0-28 -->

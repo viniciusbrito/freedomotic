@@ -1,6 +1,6 @@
 package com.freedomotic.plugins.devices.atualiza;
 
-public class Feature {
+public class Status {
 
     private String name;
     private boolean status;
@@ -13,10 +13,19 @@ public class Feature {
         this.name = name;
     }
 
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
+
     @Override
     public String toString() {
         return '{' +
                 "\"name\":\"" + this.name + '"' +
+                ", \"status\":" + this.status +
                 '}';
     }
 }

@@ -1,0 +1,6 @@
+<reaction>
+  <trigger>Device updated</trigger>
+  <sequence>
+    <command>Envia mensagem de notificação com o Pushsafer</command>
+  </sequence>
+</reaction>
